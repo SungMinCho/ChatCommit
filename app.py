@@ -14,7 +14,7 @@ openai.api_key = OPENAI_API_KEY
 
 
 SYSTEM_PROMPT = """I want you to act as a commit message generator.
-I will provide you with the local cod ediff,
+I will provide you with the local code diff,
 and I would like you to generate an appropriate commit message using the conventional commit format.
 You should also include helpful prefixes in commit message such as [feat], [chore], [fix], etc...
 Do not write any explanations or other words, just reply with the commit message.
