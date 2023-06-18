@@ -121,31 +121,5 @@ def get_local_code_diff(repo):
     return diff
 
 
-def process_chat_message(chat_message, diff):
-    prompt = f"## Code Diff:\n\n{diff}\n\n## Chat Message:\n\n{chat_message}\n\n## Generated Commit Message:"
-
-    # Make API call to OpenAI with the appropriate prompt and content of the code diff
-    response = requests.post(
-        f"https://api.openai.com/v1/engines/{OPENAI_MODEL_NAME}/completions",
-        headers={
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "prompt": prompt,
-            "max_tokens": 64,
-        },
-    )
-
-    if response.status_code == 200:
-        data = response.json()
-        completions = data["choices"]
-        if completions:
-            commit_message = completions[0]["text"].strip()
-            return commit_message
-
-    return "Error generating commit message"
-
-
 if __name__ == "__main__":
     app.run(debug=True, port=4300)
